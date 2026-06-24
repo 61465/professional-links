@@ -1,0 +1,30 @@
+app = "mobeface-api"
+primary_region = "fra"
+
+[build]
+  dockerfile = "backend/Dockerfile"
+
+[env]
+  PORT = "8001"
+  CACHE_TTL_SECONDS = "900"
+
+[http_service]
+  internal_port = 8001
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[http_service.checks]]
+  grace_period = "10s"
+  interval = "30s"
+  method = "get"
+  path = "/api/health"
+  protocol = "http"
+  timeout = "5s"
+
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1

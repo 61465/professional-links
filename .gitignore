@@ -1,0 +1,43 @@
+# ── Python ───────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ── Node / Frontend ──────────────────────────────────
+node_modules/
+frontend/dist/
+.vite/
+*.local
+npm-debug.log*
+yarn-debug.log*
+
+# ── Environment / Secrets ────────────────────────────
+.env
+.env.local
+.env.*.local
+*.pem
+
+# ── IDE ──────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ── Logs / Temp ──────────────────────────────────────
+*.log
+.smoke*.json
+.repo*.json
+*.tmp
+
+# ── Gemini reference docs (kept local) ───────────────
+بناء تطبيق تجميع إعلانات الهواتف والألعاب - Google Gemini.html
+بناء تطبيق تجميع إعلانات الهواتف والألعاب - Google Gemini_files/

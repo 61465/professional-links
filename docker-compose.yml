@@ -1,0 +1,28 @@
+services:
+  backend:
+    build: ./backend
+    container_name: mobeface-backend
+    env_file: .env
+    environment:
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost}
+    restart: unless-stopped
+    expose:
+      - "8001"
+
+  proxy:
+    image: caddy:2-alpine
+    container_name: mobeface-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend/dist:/srv:ro
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
