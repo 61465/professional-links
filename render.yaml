@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: mobeface-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: ALLOWED_ORIGINS
+        value: https://61465.github.io
+      - key: CACHE_TTL_SECONDS
+        value: "900"
+      - key: LOG_LEVEL
+        value: INFO
+      - key: PORT
+        value: "8001"
