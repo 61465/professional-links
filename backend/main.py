@@ -113,6 +113,8 @@ CATEGORY_RULES = {
 JUNK_KEYWORDS = [
     "sim card", "esim", "mint mobile", "unlimited service", "plan service",
     "wanted", "iso ", "looking for", "trade for", "free ",
+    "landline", "cordless phone", "speakerphone", "conference phone",
+    "rotary phone", "t rex phone",
 ]
 
 # حدود سعر منطقية لكل فئة (من NEXUS data_pipeline)
@@ -168,6 +170,16 @@ def is_junk(text: str) -> bool:
     """True إذا الإعلان غير مرغوب (خدمة، wanted, trade)."""
     t = text.lower()
     return any(j in t for j in JUNK_KEYWORDS)
+
+
+def _city_state(city: str) -> str:
+    return {
+        "springfield":  "MA",
+        "westernmass":  "MA",
+        "boston":       "MA",
+        "hartford":     "CT",
+        "providence":   "RI",
+    }.get(city, "MA")
 
 
 def is_valid_price_for_category(price: int | None, category: str) -> bool:
@@ -369,6 +381,7 @@ async def fetch_craigslist(client: httpx.AsyncClient, city: str, cat: str, query
             fault = detect_fault(title)
             address = schema_item.get("offers", {}).get("availableAtOrFrom", {}).get("address", {})
             city_name = address.get("addressLocality") or city.title()
+            state = address.get("addressRegion") or _city_state(city)
 
             results.append({
                 "id":          make_id("cl", link),
@@ -382,7 +395,7 @@ async def fetch_craigslist(client: httpx.AsyncClient, city: str, cat: str, query
                 "image":       image,
                 "url":         link,
                 "fault":       fault,
-                "city":        f"{city_name}, {('MA' if city in ('springfield','westernmass','boston') else 'CT' if city=='hartford' else 'RI')}",
+                "city":        f"{city_name}, {state}",
                 "hot":         bool(price and price < 250 and cond == "working"),
             })
     except Exception as e:
