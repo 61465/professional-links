@@ -1,16 +1,35 @@
 // ── بوابات البحث للمنصات المحمية ─────────────────────────────────────────
-// هذه المنصات لا تسمح بالسحب — نعرضها كروابط بحث مباشرة فقط
+// Facebook Marketplace يستخدم Place ID الفعلي لـ Springfield, MA (108036045887725)
+// لا يكفي latitude/longitude — Facebook يعتمد على موقع الحساب المسجل.
+// المستخدم قد يحتاج يضبط موقعه في Facebook → Marketplace settings → Location
+//
+// OfferUp يقبل zip مباشرة في الـ URL (يعمل دون تسجيل دخول)
+const FB_LOC = "108036045887725"; // Springfield, MA place ID
+const FB_BASE = `https://www.facebook.com/marketplace/${FB_LOC}/search`;
+const FB_NOTE = "⚠️ لو ظهرت إعلانات من بلدك: افتح Facebook Marketplace مرة، اضبط Location = Springfield, MA، ثم ارجع.";
+
 export const SEARCH_PORTALS = [
   {
     id: "portal-fb-phones",
     platform: "Facebook Marketplace",
     platformColor: "#1877f2",
     platformIcon: "📘",
-    description: "هواتف مستعملة — Springfield, MA (دائرة 16 كم)",
-    query: "smartphones used",
+    description: "هواتف مستعملة — Springfield, MA",
+    query: "smartphone used",
     category: "phone",
-    url: "https://www.facebook.com/marketplace/springfield/search/?query=smartphone%20used&latitude=42.1015&longitude=-72.5898&radius=16",
-    note: "تحتاج تسجيل دخول Facebook",
+    url: `${FB_BASE}?query=${encodeURIComponent("smartphone used")}&radius=16`,
+    note: FB_NOTE,
+  },
+  {
+    id: "portal-fb-iphone",
+    platform: "Facebook Marketplace",
+    platformColor: "#1877f2",
+    platformIcon: "📘",
+    description: "iPhone مستعمل أو للقطع — Springfield, MA",
+    query: "iphone used",
+    category: "phone",
+    url: `${FB_BASE}?query=${encodeURIComponent("iphone")}&radius=16&sortBy=creation_time_descend`,
+    note: FB_NOTE,
   },
   {
     id: "portal-fb-gaming",
@@ -20,8 +39,8 @@ export const SEARCH_PORTALS = [
     description: "أجهزة ألعاب (PS5, Xbox, Switch) — Springfield",
     query: "gaming console",
     category: "gaming",
-    url: "https://www.facebook.com/marketplace/springfield/search/?query=gaming%20console&latitude=42.1015&longitude=-72.5898&radius=16",
-    note: "تحتاج تسجيل دخول Facebook",
+    url: `${FB_BASE}?query=${encodeURIComponent("gaming console")}&radius=16`,
+    note: FB_NOTE,
   },
   {
     id: "portal-fb-tablets",
@@ -31,8 +50,19 @@ export const SEARCH_PORTALS = [
     description: "أجهزة لوحية وآيباد — Springfield, MA",
     query: "ipad tablet",
     category: "tablet",
-    url: "https://www.facebook.com/marketplace/springfield/search/?query=ipad%20tablet&latitude=42.1015&longitude=-72.5898&radius=16",
-    note: "تحتاج تسجيل دخول Facebook",
+    url: `${FB_BASE}?query=${encodeURIComponent("ipad tablet")}&radius=16`,
+    note: FB_NOTE,
+  },
+  {
+    id: "portal-fb-laptop",
+    platform: "Facebook Marketplace",
+    platformColor: "#1877f2",
+    platformIcon: "📘",
+    description: "لابتوب مستعمل — Springfield, MA",
+    query: "macbook laptop",
+    category: "laptop",
+    url: `${FB_BASE}?query=${encodeURIComponent("macbook laptop")}&radius=16`,
+    note: FB_NOTE,
   },
   {
     id: "portal-ou-phones",
@@ -65,6 +95,17 @@ export const SEARCH_PORTALS = [
     query: "ipad tablet android",
     category: "tablet",
     url: "https://offerup.com/search/?q=ipad+tablet&zip=01119&radius=15",
+    note: "لا يحتاج تسجيل دخول",
+  },
+  {
+    id: "portal-ou-laptop",
+    platform: "OfferUp",
+    platformColor: "#07a85b",
+    platformIcon: "🟢",
+    description: "لابتوب مستعمل — 01119",
+    query: "macbook laptop",
+    category: "laptop",
+    url: "https://offerup.com/search/?q=macbook+laptop&zip=01119&radius=15",
     note: "لا يحتاج تسجيل دخول",
   },
 ];

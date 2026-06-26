@@ -1049,6 +1049,46 @@ h1,h2,h3,h4 { font-weight: 700; line-height: 1.2; }
   animation: pulse-gold 2s infinite;
 }
 
+/* ── Facebook Location Warning ───────────────────────────────────────────── */
+.fb-location-warning {
+  display: flex;
+  gap: 14px;
+  background: rgba(24, 119, 242, 0.08);
+  border: 1px solid rgba(24, 119, 242, 0.3);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  align-items: flex-start;
+}
+.fb-warning-icon { font-size: 28px; flex-shrink: 0; }
+.fb-location-warning strong { color: #60a5fa; font-size: 14px; }
+.fb-location-warning p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 6px 0;
+}
+.fb-location-warning ol {
+  margin: 8px 0 8px 20px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.fb-location-warning ol li { margin-bottom: 2px; }
+.fb-location-warning code {
+  background: var(--dark-600);
+  color: var(--gold-400);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+}
+.fb-location-warning a {
+  color: var(--gold-400);
+  text-decoration: underline;
+}
+.fb-location-warning b { color: var(--text-primary); }
+
 /* ── Portal Card (Protected Platforms) ───────────────────────────────────── */
 .portal-grid {
   display: grid;

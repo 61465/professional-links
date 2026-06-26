@@ -314,6 +314,27 @@ export default function App() {
               <h2 className="section-title">🔒 منصات محمية — روابط بحث مباشرة</h2>
               <span className="feed-badge-note">هذه المنصات لا تسمح بسحب البيانات، لذلك لا نعرض منها إعلانات وهمية</span>
             </div>
+
+            {(source === 'all' || source === 'facebook') && (
+              <div className="fb-location-warning">
+                <div className="fb-warning-icon">📍</div>
+                <div>
+                  <strong>تنبيه مهم — Facebook Marketplace:</strong>
+                  <p>
+                    Facebook يعرض إعلانات <b>موقعك المسجل</b> في الحساب وليس Springfield.
+                    قبل فتح أي رابط Facebook، افعل التالي مرة واحدة:
+                  </p>
+                  <ol>
+                    <li>افتح <a href="https://www.facebook.com/marketplace/" target="_blank" rel="noreferrer">facebook.com/marketplace</a></li>
+                    <li>اضغط على شريط الموقع أعلى الصفحة</li>
+                    <li>اكتب <code>Springfield, MA</code> ثم اختر <b>Springfield, Massachusetts</b></li>
+                    <li>اضبط Radius = 16 km</li>
+                  </ol>
+                  <p>بعدها كل روابط Facebook هنا ستعرض إعلانات Springfield الحقيقية.</p>
+                </div>
+              </div>
+            )}
+
             <div className="portal-grid">
               {filteredPortals.map(p => <PortalCard key={p.id} portal={p} />)}
             </div>
